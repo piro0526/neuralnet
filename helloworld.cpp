@@ -7,6 +7,25 @@
 using namespace std;
 typedef vector<vector<long double>> matrix;
 
+long double mean_squared_error(matrix &y, matrix &t)
+{
+    long double res = 0;
+    for(int i=0; i < y.size(); ++i)
+    {
+        long double sum = 0;
+        for(int j=0; j < y[0].size(); ++j)
+        {
+            sum += (y[i][j] -t[i][j] * (y[i][j] - t[i][j]));
+        }
+
+        sum /= 2*y.size();
+        res+=sum;
+    }
+
+    return res;
+}
+
+
 enum ActivationType{
     Sigmoid,
     Liner,
@@ -177,6 +196,8 @@ public:
         return res;
     }
 };
+
+
 
 
 int main()
